@@ -1,11 +1,11 @@
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Thumb from '../../assets/image/thumb.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function classNames(...classes) {
-return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function AdminNavbar({ page }) {
@@ -55,15 +55,17 @@ export default function AdminNavbar({ page }) {
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
           {navigation.map((item, index) => (
-            <DisclosureButton
-              key={item.name} as="a"
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                index === page ? 'bg-gray-500 text-white' : 'hover:bg-[#8b5cf6]',
-                'block rounded-md px-3 py-2 text-base text-white font-medium hover:cursor-pointer',
-              )}>
-              {item.name}
-            </DisclosureButton>
+            <Link key={item.name} to={item.href}>
+              <DisclosureButton
+                key={item.name} as="a"
+                aria-current={item.current ? 'page' : undefined}
+                className={classNames(
+                  index === page ? 'bg-gray-500 text-white' : 'hover:bg-[#8b5cf6]',
+                  'block rounded-md px-3 py-2 text-base text-white font-medium hover:cursor-pointer',
+                )}>
+                {item.name}
+              </DisclosureButton>
+            </Link>
           ))}
         </div>
       </DisclosurePanel>
