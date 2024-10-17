@@ -7,7 +7,7 @@ import UserLayout from '@/app/(layout)/UserLayout';
 export async function generateMetadata({ params }) {
   const movie = await getMovieBySlug(params.slug);
   
-  const url = process.env.NEXT_PUBLIC_URL + '/movie/' + movie&&movie.mov_slug;
+  const url = process.env.NEXT_PUBLIC_URL + '/movie/' + movie?.mov_slug;
 
   return {
     title: movie?movie.mov_name:'',

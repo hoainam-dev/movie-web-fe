@@ -30,19 +30,19 @@ export async function generateMetadata() {
   };
 }
 export default async function AdminHome({ searchParams }) {
-  const currentPage = parseInt(searchParams.page|| 1);
+  const currentPage = parseInt(searchParams?.page|| 1);
   const sort = parseInt(searchParams.sort) || 1;
   const params = {
     sort,
-    query: searchParams.query,
-    year: searchParams.year,
-    type: searchParams.type,
-    category: searchParams.cat,
-    country: searchParams.ctr,
-    lang: searchParams.lang,
-    quality: searchParams.qua,
-    actor: searchParams.act,
-    director: searchParams.dir,
+    query: searchParams?.query,
+    year: searchParams?.year,
+    type: searchParams?.type,
+    category: searchParams?.cat,
+    country: searchParams?.ctr,
+    lang: searchParams?.lang,
+    quality: searchParams?.qua,
+    actor: searchParams?.act,
+    director: searchParams?.dir,
   };
 
   const dataPromise = await filterMovie(params, currentPage);
@@ -72,9 +72,9 @@ async function DataMovieComponent({ dataPromise, DataFilterPromise, currentPage,
     paramState?.lang,
     paramState?.quality,
     paramState?.year,
-    dataFilter.typeData&&dataFilter.typeData.length>0?dataFilter.typeData.filter(t => t.type_slug === paramState?.type).map(t => t.type_name).join(", "):'',
-    dataFilter.categoryData&&dataFilter.categoryData.length>0?dataFilter.categoryData.filter(cate => cate.cat_slug === paramState?.category).map(cate => cate.cat_name).join(", "):'',
-    dataFilter.countryData&&dataFilter.countryData.length>0?dataFilter.countryData.filter(coun => coun.ctr_slug === paramState?.country).map(coun => coun.ctr_name).join(", "):'',
+    dataFilter?.typeData&&dataFilter?.typeData?.length>0?dataFilter?.typeData?.filter(t => t.type_slug === paramState?.type).map(t => t.type_name).join(", "):'',
+    dataFilter?.categoryData&&dataFilter?.categoryData?.length>0?dataFilter?.categoryData?.filter(cate => cate.cat_slug === paramState?.category).map(cate => cate.cat_name).join(", "):'',
+    dataFilter?.countryData&&dataFilter?.countryData?.length>0?dataFilter?.countryData?.filter(coun => coun.ctr_slug === paramState?.country).map(coun => coun.ctr_name).join(", "):'',
     paramState?.actor,
     paramState?.director
   ];

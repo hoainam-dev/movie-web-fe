@@ -7,7 +7,7 @@ import React from 'react'
 export async function generateMetadata({ params }) {
   const movie = await getMovieBySlug(params.slug);
   
-  const url = process.env.NEXT_PUBLIC_URL + '/admin/movie/' + movie?movie.mov_slug:'';
+  const url = process.env.NEXT_PUBLIC_URL + '/admin/movie/' + movie?.mov_slug;
 
   return {
     title: `Chỉnh sửa phim - ${movie?.mov_name} | Quản trị viên PhimVip.com`,
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
       url,
       images: [
         {
-          url: movie?movie.poster_url:''
+          url: movie?.poster_url
         }
       ]
     },

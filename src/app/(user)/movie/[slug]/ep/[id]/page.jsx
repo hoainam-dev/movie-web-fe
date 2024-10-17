@@ -15,16 +15,16 @@ export async function generateMetadata({ params }) {
     const url = process.env.NEXT_PUBLIC_URL + '/movie/' + params.slug + '/ep/' + params.id;
   
     return {
-      title: currentEp?currentEp.ep_title:'',
-      description: movie?movie.content:'',
+      title: currentEp?.ep_title,
+      description: movie?.content,
       openGraph: {
         ...baseOpenGraph,
-        title: movie?`${movie.mov_name} - ${movie.ori_name} (${movie.Year.year_name}) - ${currentEp&&currentEp.ep_name}`:'',
-        description: movie?movie.content:'',
+        title: movie?`${movie?.mov_name} - ${movie?.ori_name} (${movie?.Year.year_name}) - ${currentEp?.ep_name}`:'',
+        description: movie?.content,
         url,
         images: [
           {
-            url: movie?movie.poster_url:''
+            url: movie?.poster_url
           }
         ]
       },
