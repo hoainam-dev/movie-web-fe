@@ -1,9 +1,33 @@
 import UserLayout from "@/app/(layout)/UserLayout";
+import { baseOpenGraph } from "@/app/sharedMetadata";
 import HomeFilter from "@/components/fillter/HomeFilter";
 import TableMovie from "@/components/movie/TableMovie";
 import Pagination from "@/components/pagination/Pagination";
 import { fetchDataFromAPI } from "@/lib/features/data/dataAPI";
 import { filterMovie } from "@/services/movieService";
+
+export async function generateMetadata() {
+  const url = process.env.NEXT_PUBLIC_URL + '/movie/';
+
+  return {
+    title: "Trang chủ Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+    description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+    openGraph: {
+      ...baseOpenGraph,
+      title: "Trang chủ Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+      description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+      url,
+      images: [
+        {
+          url: '/public/thumb.png'
+        }
+      ]
+    },
+    alternates: {
+      canonical: url
+    }
+  };
+}
 
 export default async function Movie({ searchParams }) {
   const currentPage = parseInt(searchParams.page|| 1);

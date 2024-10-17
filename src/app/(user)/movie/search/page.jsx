@@ -3,6 +3,30 @@ import { IconHome } from '@/components/icon/Icon';
 import Link from 'next/link';
 import MovieComponent from '../MovieComponent';
 import UserLayout from "@/app/(layout)/UserLayout";
+import { baseOpenGraph } from "@/app/sharedMetadata";
+
+export async function generateMetadata() {
+  const url = process.env.NEXT_PUBLIC_URL + '/movie/';
+
+  return {
+    title: "Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+    description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+    openGraph: {
+      ...baseOpenGraph,
+      title: "Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+      description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+      url,
+      images: [
+        {
+          url: '/public/thumb.png'
+        }
+      ]
+    },
+    alternates: {
+      canonical: url
+    }
+  };
+}
 
 export default async function SearchMovie({ searchParams }) {
   const currentPage= parseInt(searchParams.page) || 1;

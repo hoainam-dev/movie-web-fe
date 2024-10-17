@@ -6,6 +6,33 @@ import VideoPlayer from './VideoPlayer';
 import ListEpisode from './ListEpisode';
 import MovieHot from './MovieHot';
 import UserLayout from '@/app/(layout)/UserLayout';
+import { baseOpenGraph } from '@/app/sharedMetadata';
+
+export async function generateMetadata({ params }) {
+    const movie = await getMovieBySlug(params.slug);
+    const currentEp = movie?.Episodes.find((ep) => ep.ep_id === parseInt(params.id))
+
+    const url = process.env.NEXT_PUBLIC_URL + '/movie/' + params.slug + '/ep/' + params.id;
+  
+    return {
+      title: currentEp?currentEp.ep_title:'',
+      description: movie?movie.content:'',
+      openGraph: {
+        ...baseOpenGraph,
+        title: movie?`${movie.mov_name} - ${movie.ori_name} (${movie.Year.year_name}) - ${currentEp&&currentEp.ep_name}`:'',
+        description: movie?movie.content:'',
+        url,
+        images: [
+          {
+            url: movie?movie.poster_url:''
+          }
+        ]
+      },
+      alternates: {
+        canonical: url
+      }
+    };
+}
 
 export default async function ViewMovie({params}) {
     const movie = await getMovieBySlug(params.slug);

@@ -5,12 +5,30 @@ import DropDownFilter from '@/components/common/DropDownFilter';
 import AdminFilter from '@/components/fillter/AdminFilter';
 import { filterMovie } from '@/services/movieService';
 import { fetchDataFromAPI } from '@/lib/features/data/dataAPI';
+import { baseOpenGraph } from '../sharedMetadata';
 
-export const metadata = {
-  title: "Trang quản trị",
-  description: "Trang quản trị phimvip.com",
-};
+export async function generateMetadata() {
+  const url = process.env.NEXT_PUBLIC_URL + '/admin';
 
+  return {
+    title: "Trang quản trị - Quản lý nội dung PhimVip.com",
+    description: "Truy cập trang quản trị để quản lý và cập nhật nội dung phim, người dùng và các chức năng hệ thống của PhimVip.com. Dành riêng cho quản trị viên với quyền hạn cao.",
+    openGraph: {
+      ...baseOpenGraph,
+      title: "Trang quản trị - Quản lý nội dung PhimVip.com",
+      description: "Truy cập trang quản trị để quản lý và cập nhật nội dung phim, người dùng và các chức năng hệ thống của PhimVip.com. Dành riêng cho quản trị viên với quyền hạn cao.",
+      url,
+      images: [
+        {
+          url: '/public/thumb.png'
+        }
+      ]
+    },
+    alternates: {
+      canonical: url
+    }
+  };
+}
 export default async function AdminHome({ searchParams }) {
   const currentPage = parseInt(searchParams.page|| 1);
   const sort = parseInt(searchParams.sort) || 1;

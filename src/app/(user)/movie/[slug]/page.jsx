@@ -14,7 +14,7 @@ export async function generateMetadata({ params }) {
     description: movie?movie.content:'',
     openGraph: {
       ...baseOpenGraph,
-      title: movie?movie.mov_name:'',
+      title: movie?`${movie.mov_name} - ${movie.ori_name} (${movie.Year.year_name})`:'',
       description: movie?movie.content:'',
       url,
       images: [
