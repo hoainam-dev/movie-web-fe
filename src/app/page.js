@@ -6,6 +6,30 @@ import { fetchDataFromAPI } from "@/lib/features/data/dataAPI";
 import { getLatestMovie } from "@/services/movieService";
 import { Suspense } from "react";
 import UserLayout from "./(layout)/UserLayout";
+import { baseOpenGraph } from "./sharedMetadata";
+
+export async function generateMetadata() {
+  const url = process.env.NEXT_PUBLIC_URL + '/movie/';
+
+  return {
+    title: "Trang chủ Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+    description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+    openGraph: {
+      ...baseOpenGraph,
+      title: "Trang chủ Phimvip - Xem phim chất lượng cao không quảng cáo - Cập nhật liên tục tại PhimVip.com",
+      description: "PhimVip.com là trang xem phim chất lượng cao, không quảng cáo, cập nhật phim mới liên tục. Trải nghiệm giải trí hàng đầu với tốc độ nhanh và nội dung phong phú.",
+      url,
+      images: [
+        {
+          url: '/public/thumb.png'
+        }
+      ]
+    },
+    alternates: {
+      canonical: url
+    }
+  };
+}
 
 export default async function Home() {
   const dataPromise = await getLatestMovie(1);
