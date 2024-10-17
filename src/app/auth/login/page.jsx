@@ -25,10 +25,6 @@ export async function generateMetadata() {
     }
   };
 }
-export const metadata = {
-  title: "Đăng nhập",
-  description: "Trang đăng nhập phimvip.com",
-};
 
 export default async function Login() {
   
