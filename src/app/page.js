@@ -38,15 +38,19 @@ async function DataMovieComponent({ dataPromise }) {
   ];
 
   return (
-    <div>
-      <div className="overflow-x-auto mb-2">
-        <p className='text-white text-[10px] xl:text-[14px] 3xl:text-[18px] mb-[8px]'><strong>{data.totalMovies} </strong> kết quả</p>
-        <TableMovie colDefs={colDefs} movies={data.movies}/>
-      </div>
+    !data
+    ?
+      <Loading />
+    :
+      <div>
+        <div className="overflow-x-auto mb-2">
+          <p className='text-white text-[10px] xl:text-[14px] 3xl:text-[18px] mb-[8px]'><strong>{data?.totalMovies} </strong> kết quả</p>
+          <TableMovie colDefs={colDefs} movies={data?.movies}/>
+        </div>
 
-      {/* pagination */}
-      {data.totalMovies!==0&&<Pagination currentPage={1} totalDatas={data.totalMovies} totalPages={data.totalPages} />}
-    </div>
+        {/* pagination */}
+        {data?.totalMovies!==0&&<Pagination currentPage={1} totalDatas={data?.totalMovies} totalPages={data?.totalPages} />}
+      </div>
   );
 }
 
